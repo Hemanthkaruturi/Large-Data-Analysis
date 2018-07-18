@@ -58,9 +58,24 @@ data.miss <- data01[,c(2,3,4,5)]
 data.frame(min=sapply(data.miss,min, na.rm=T),max=sapply(data.miss,max,na.rm=T))
 
 #visualizing missing values
+#This is not working properly on all versions but it looks nice
 #install.packages('naniar')
 library('naniar')
 vis_miss(data01, warn_large_data = FALSE)
+
+#for visualizing missing values
+library(Amelia)
+missmap(data01)
+
+#Not working in R 3.5.1
+library(VIM)
+aggr(data01, prop = F, numbers = T)
+
+#for visualizing missing values
+install.packages("RColorBrewer")
+library(RColorBrewer)
+plot_missing(data01, 5, col = brewer.pal(n = 9, name = "Blues"))
+
 
 #finding percentage of sparsity of the data
 library(textTinyR)
