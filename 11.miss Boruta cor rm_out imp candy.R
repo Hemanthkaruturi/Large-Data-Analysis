@@ -1,7 +1,7 @@
 #miss_Boruta_cor_rm_out.imp_candy
 
 #Import data
-load(file = "data_miss_boruta_cor_rm_out_imp.RData")
+load(file = "Data/data_miss_boruta_cor_rm_out_imp.RData")
 
 # Remove x079,x086,x089,x101,x147,x175 because they are constant values
 #These values become constant when outliers are deleted
@@ -49,6 +49,8 @@ rmse <- function(error)
 
 error <- svm_regressor$residuals  # same as data$Y - predictedY
 predictionRMSE <- rmse(error)   # 24.65957
+
+rmse <- sqrt(mean(data.miss.boruta.cor.rm_out.imp$y - y_pred)^2)
 
 ########################################### Decision Tree #####################################################
 #decision tree regression
