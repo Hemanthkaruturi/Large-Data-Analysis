@@ -54,10 +54,10 @@ canditate 2:
 			- MeanAbsolutePercentageError: 0.04168857
 			- RMSE: 33.2911
 		* K-Fold:
-			- correlation: 0.9585608
-			- min_max accuracy:
-			- MeanAbsolutePercentageError:  
-			- RMSE: 33.32204
+			- correlation: 0.9581742
+			- min_max accuracy: 0.9603841
+			- MeanAbsolutePercentageError: 0.04172985
+			- RMSE: 33.46125
 
 canditate 3:
 	In candidate 3 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values with 999 and then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ), then applied Principal component analysis to whole sample data. Fitted the data to SVM, Decision tree, Random Forest
