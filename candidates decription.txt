@@ -9,6 +9,8 @@ The Boruta Algorithm:
 
 	If a feature hasn't been recorded as a hit in say 15 iterations, you reject it and also remove it from the original matrix. After a set number of iterations -or if all the features have been either confirmed or rejected- you stop.
 
+Note: I removed variables having missing values more than 50% and removed variables with unique values and removed one duplicate variable
+
 canditate 1:
 	In candidate 1 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values with 999 and then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ). Fitted the data to SVM, Decision tree, Random Forest. Done k fold cross validatoin with random random forest
 	Results:
