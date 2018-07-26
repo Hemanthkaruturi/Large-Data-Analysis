@@ -2,7 +2,7 @@
 #999_Boruta_cor_sqrt_candy
 
 #Import data
-load(file = "data_999_boruta_cor_sqrt.RData")
+load(file = "Data/data_999_boruta_cor_sqrt.RData")
 
 # Splitting the dataset into the Training set and Test set
 #install.packages('caTools')
@@ -46,6 +46,7 @@ rmse <- function(error)
 error <- svm_regressor$residuals  # same as data$Y - predictedY
 predictionRMSE <- rmse(error)   # 23.94179
 
+rmse <- sqrt(mean((data.999.boruta.cor.sqrt.test$y - y_pred)^2))
 ########################################### Decision Tree #####################################################
 #decision tree regression
 # Fitting Decision Tree Regression to the dataset
