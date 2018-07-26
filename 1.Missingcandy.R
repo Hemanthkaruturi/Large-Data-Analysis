@@ -3,7 +3,7 @@
 #Importing data
 library(data.table)
 library(dplyr)
-data.org <- fread("dataset_00_with_header.csv")
+data.org <- fread("Data/dataset_00_with_header.csv")
 data <- sample_n(data.org,5000)
 
 #Finding missing values
