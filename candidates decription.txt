@@ -1,0 +1,178 @@
+The Boruta Algorithm:
+	The Boruta algorithm is a wrapper built around the random forest classification algorithm. It tries to capture all the important, interesting features you might have in your dataset with respect to an outcome variable.
+
+	First, it duplicates the dataset, and shuffle the values in each column. These values are called shadow features. * Then, it trains a classifier, such as a Random Forest Classifier, on the dataset. By doing this, you ensure that you can an idea of the importance -via the Mean Decrease Accuracy or Mean Decrease Impurity- for each of the features of your data set. The higher the score, the better or more important.
+
+	Then, the algorithm checks for each of your real features if they have higher importance. That is, whether the feature has a higher Z-score than the maximum Z-score of its shadow features than the best of the shadow features. If they do, it records this in a vector. These are called a hits. Next,it will continue with another iteration. After a predefined set of iterations, you will end up with a table of these hits. Remember: a Z-score is the number of standard deviations from the mean a data point.
+
+	At every iteration, the algorithm compares the Z-scores of the shuffled copies of the features and the original features to see if the latter performed better than the former. If it does, the algorithm will mark the feature as important. In essence, the algorithm is trying to validate the importance of the feature by comparing with random shuffled copies, which increases the robustness. This is done by simply comparing the number of times a feature did better with the shadow features using a binomial distribution.
+
+	If a feature hasn't been recorded as a hit in say 15 iterations, you reject it and also remove it from the original matrix. After a set number of iterations -or if all the features have been either confirmed or rejected- you stop.
+
+canditate 1:
+	In candidate 1 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values with 999 and then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ). Fitted the data to SVM, Decision tree, Random Forest. Done k fold cross validatoin with random random forest
+	Results:
+		* SVM:
+			- correlation: 0.9551671
+			- min_max accuracy: 0.9582211
+			- MeanAbsolutePercentageError: 0.04408113
+			- RMSE: 34.4532
+		* Decission Tree:
+			- correlation: 0.8649619
+			- min_max accuracy: 0.9303004
+			- MeanAbsolutePercentageError: 0.07513002
+			- RMSE: 58.35576
+		* Random Forest:
+			- correlation: 0.958286
+			- min_max accuracy: 0.9603352
+			- MeanAbsolutePercentageError: 0.04181298
+			- RMSE: 33.49541
+		* K-Fold:
+			- correlation: 0.9551633
+			- min_max accuracy:
+			- MeanAbsolutePercentageError:  
+			- RMSE: 34.58896
+
+canditate 2:
+	In candidate 2 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values using missForest (taking data with values as one data set and with missing as another dataset then predicting missing values using Random Forest) and then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ). Fitted the data to SVM, Decision tree, Random Forest
+	Results:
+		* SVM:
+			- correlation: 0.9590258
+			- min_max accuracy: 0.9603105
+			- MeanAbsolutePercentageError: 0.04172859
+			- RMSE: 34.4532
+		* Decission Tree:
+			- correlation: 0.8523194
+			- min_max accuracy: 0.9272056
+			- MeanAbsolutePercentageError: 0.07876914
+			- RMSE: 60.84711
+		* Random Forest:
+			- correlation: 0.9587542
+			- min_max accuracy: 0.9604293
+			- MeanAbsolutePercentageError: 0.04168857
+			- RMSE: 33.2911
+		* K-Fold:
+			- correlation: 0.9585608
+			- min_max accuracy:
+			- MeanAbsolutePercentageError:  
+			- RMSE: 33.32204
+
+canditate 3:
+	In candidate 3 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values with 999 and then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ), then applied Principal component analysis to whole sample data. Fitted the data to SVM, Decision tree, Random Forest
+	Results:
+		* SVM:
+			- correlation: 0.9244398
+			- min_max accuracy: 0.9471709
+			- MeanAbsolutePercentageError: 0.05656086
+			- RMSE: 33.32204
+		* Decission Tree:
+			- correlation: 0.8640948
+			- min_max accuracy: 0.9290777
+			- MeanAbsolutePercentageError: 0.07704842
+			- RMSE: 58.54799
+		* Random Forest:
+			- correlation: 0.9371509
+			- min_max accuracy: 0.9494768
+			- MeanAbsolutePercentageError: 0.0539403
+			- RMSE: 41.5305
+		* K-Fold:
+			- correlation:
+			- min_max accuracy:
+			- MeanAbsolutePercentageError:  
+			- RMSE:
+
+canditate 4:
+	In candidate 2 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values using missForest (taking data with values as one data set and with missing as another dataset then predicting missing values using Random Forest) and then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ), then applied Principal component analysis to whole sample data. Fitted the data to SVM, Decision tree, Random Forest
+	Results:
+		* SVM:
+			- correlation: 0.9295587
+			- min_max accuracy: 0.9487734
+			- MeanAbsolutePercentageError: 0.05464015
+			- RMSE: 33.32204
+		* Decission Tree:
+			- correlation: 0.8577832
+			- min_max accuracy: 0.9275823
+			- MeanAbsolutePercentageError: 0.07803002
+			- RMSE: 59.82314
+		* Random Forest:
+			- correlation: 0.9426858
+			- min_max accuracy: 0.9512778
+			- MeanAbsolutePercentageError: 0.05188578
+			- RMSE: 39.9178
+		* K-Fold:
+			- correlation:
+			- min_max accuracy:
+			- MeanAbsolutePercentageError:  
+			- RMSE:
+
+canditate 5:
+	In candidate 5 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values with 999 and then uses boruta package(this is a method performs a top-down search for relevant features by comparing original attributes' importance with importance achievable at random, estimated using their permuted copies, and progressively elliminating irrelevant featurs to stabilise that test) to find important features, removed unimportant features and then again removed features having corelation with independent variables, then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ). Fitted the data to SVM, Decision tree, Random Forest
+	Results:
+		* SVM:
+			- correlation: 0.9468951
+			- min_max accuracy: 0.9543503
+			- MeanAbsolutePercentageError: 0.0483993
+			- RMSE: 33.32204
+		* Decission Tree:
+			- correlation: 0.8554715
+			- min_max accuracy: 0.9268571
+			- MeanAbsolutePercentageError: 0.07961293
+			- RMSE: 60.22508
+		* Random Forest:
+			- correlation: 0.9511298
+			- min_max accuracy: 0.9557325
+			- MeanAbsolutePercentageError: 0.0467425
+			- RMSE: 36.21569
+		* K-Fold:
+			- correlation:
+			- min_max accuracy:
+			- MeanAbsolutePercentageError:  
+			- RMSE:
+
+canditate 6:
+	In candidate 6 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values using missForest(taking data with values as one data set and with missing as another dataset then predicting missing values using Random Forest) and then uses boruta package(this is a method performs a top-down search for relevant features by comparing original attributes' importance with importance achievable at random, estimated using their permuted copies, and progressively elliminating irrelevant featurs to stabilise that test) to find important features, removed unimportant features and then again removed features having corelation with independent variables, then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ). Fitted the data to SVM, Decision tree, Random Forest
+	Results:
+		* SVM:
+			- correlation: 0.950783
+			- min_max accuracy: 0.9559549
+			- MeanAbsolutePercentageError: 0.04653434
+			- RMSE: 33.32204
+		* Decission Tree:
+			- correlation: 0.8351215
+			- min_max accuracy: 0.9235816
+			- MeanAbsolutePercentageError: 0.08316577 
+			- RMSE: 64.04693
+		* Random Forest:
+			- correlation: 0.9518595
+			- min_max accuracy: 0.956735
+			- MeanAbsolutePercentageError: 0.04572806
+			- RMSE: 35.90957
+		* K-Fold:
+			- correlation:
+			- min_max accuracy:
+			- MeanAbsolutePercentageError:  
+			- RMSE:
+
+canditate 7:
+	In candidate 6 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values using missForest(taking data with values as one data set and with missing as another dataset then predicting missing values using Random Forest) and then uses boruta package(this is a method performs a top-down search for relevant features by comparing original attributes' importance with importance achievable at random, estimated using their permuted copies, and progressively elliminating irrelevant featurs to stabilise that test) to find important features, removed unimportant features and then again removed features having corelation with independent variables, then removed values in every variable present after 3rd standard deviation (To reduce the skewness). After removing outliers found that variables x079,x086,x089,x101,x147,x175 became constants because most of those variables are binary and 80% of values are 0's hence rest of the values are outside of 3rd standard deviation. Fitted the data to SVM, Decision tree, Random Forest
+	Results:
+		* SVM:
+			- correlation: 0.9433861
+			- min_max accuracy: 0.9529202
+			- MeanAbsolutePercentageError: 0.04976877 
+			- RMSE: 33.32204
+		* Decission Tree:
+			- correlation: 0.835209
+			- min_max accuracy: 0.9236298
+			- MeanAbsolutePercentageError: 0.08311636
+			- RMSE: 64.03255
+		* Random Forest:
+			- correlation: 0.949127
+			- min_max accuracy: 0.9557728
+			- MeanAbsolutePercentageError: 0.04677078
+			- RMSE: 36.65506
+		* K-Fold:
+			- correlation:
+			- min_max accuracy:
+			- MeanAbsolutePercentageError:  
+			- RMSE:
