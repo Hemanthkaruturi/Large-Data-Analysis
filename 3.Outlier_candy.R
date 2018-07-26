@@ -1,5 +1,5 @@
-load(data_999_boruta_cor.RData)
-load(data_miss_boruta_cor.RData)
+load(file = "Data/data_999_boruta_cor.RData")
+load(file = "Data/data_miss_boruta_cor.RData")
 
 ################################### Replacing Outliers with sd ###################################
 findOutlier <- function(data, cutoff = 3) {
