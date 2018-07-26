@@ -4,7 +4,7 @@ library(doMC)
 registerDoMC(cores = 8)
 
 #Importing data
-load(file = "datamiss.RData")
+load(file = "Data/datamiss.RData")
 
 ################################### sqrt Transformation #########################################################
 #Find variables with negative values
@@ -69,6 +69,7 @@ rmse <- function(error)
 error <- dt_regressor$residuals  # same as data$Y - predictedY
 predictionRMSE <- rmse(error)   # 18.61278
 
+rmse <- sqrt(mean((data.miss.sqrt.test$y - y_pred)^2))
 ########################################### Decision Tree #####################################################
 #decision tree regression
 # Fitting Decision Tree Regression to the dataset
