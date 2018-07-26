@@ -1,6 +1,6 @@
 #miss_boruta_cor_sqrt
 
-load(file = "data_miss_boruta_cor.RData")
+load(file = "Data/data_miss_boruta_cor.RData")
 
 t(sapply(data.miss.boruta.cor, range))
 #No negative values
