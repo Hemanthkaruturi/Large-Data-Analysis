@@ -1,5 +1,5 @@
-load(data_999.RData)
-load(data_miss.RData)
+load(file = "Data/data_999.RData")
+load(file = "Data/data_miss.RData")
 
 ########################## Feature Selection with Boruta ###########################
 #Finding important features using boruta package
