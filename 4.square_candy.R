@@ -1,4 +1,4 @@
-load(data_999_boruta_cor.RData)
+load(file = "Data/data_999_boruta_cor.RData")
 
 ################################# Log transformation #############################################
 #Find variables with negative values
