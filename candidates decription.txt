@@ -8,9 +8,9 @@ The Boruta Algorithm:
 	At every iteration, the algorithm compares the Z-scores of the shuffled copies of the features and the original features to see if the latter performed better than the former. If it does, the algorithm will mark the feature as important. In essence, the algorithm is trying to validate the importance of the feature by comparing with random shuffled copies, which increases the robustness. This is done by simply comparing the number of times a feature did better with the shadow features using a binomial distribution.
 
 	If a feature hasn't been recorded as a hit in say 15 iterations, you reject it and also remove it from the original matrix. After a set number of iterations -or if all the features have been either confirmed or rejected- you stop.
-
-Note: I removed variables having missing values more than 50% and removed variables with unique values and removed one duplicate variable
-
+----------------------------------------------------------------------------------------------------------------------------------------
+I removed variables having missing values more than 40% and removed variables with unique values and removed one duplicate variable
+----------------------------------------------------------------------------------------------------------------------------------------
 canditate 1:
 	In candidate 1 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values with 999 and then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ). Fitted the data to SVM, Decision tree, Random Forest. Done k fold cross validatoin with random random forest
 	Results:
@@ -60,7 +60,7 @@ canditate 2:
 			- RMSE: 33.46125
 
 canditate 3:
-	In candidate 3 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values with 999 and then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ), then applied Principal component analysis to whole sample data. Fitted the data to SVM, Decision tree, Random Forest
+	In candidate 3 i took sample of 5000 records from 100000 records i.e., 5% sample data, imputed missing values with 999 and then applied square root to whole data (variables x043 and x236 have negative values so i took square of those variables ),removed variables with variance zero, then applied Principal component analysis to whole sample data. Fitted the data to SVM, Decision tree, Random Forest
 	Results:
 		* SVM:
 			- correlation: 0.9244398
@@ -178,3 +178,15 @@ canditate 7:
 			- min_max accuracy:
 			- MeanAbsolutePercentageError:  
 			- RMSE:
+***************************************************************************************************************************************
+Fun Facts:
+	* For both candidate 1 and 2, SVM got same RMSE 34.4532 and for remianing all candidates it is 33.32204. but rest of the 		  algorithms shows different RMSE for different candidates. SVM never show bias😉 
+	* Decesion tree shows high RMSE for all the candidates. May be decesion trees are not good at Regression🤦‍♂️
+	* Imputing missing values using Random Forest gives good result in all of the scenarios but it takes more computing power and 		  time🎯⏰.
+	* Random Forest perform well when we don't do feature selection or feature engineering and SVM performs better when we do feature selection or feature engineering. Hard to decide🤷‍♂️
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ __ _ _ _ _ __ _ _ _ __ _ _ _ __ _ _ _ _ _ __ _ _ __ _ _ __ __ _ _ _ ___ _ _ _ _ __ _ __ ____
+| Note: I want build two more candidates one is by clusturing the whole dataset such that we can get all the skewed data as one dataset| | and one with most of the values as another dataset or by taking all the values after 3rd standard deviation as one dataset and rest  |  | them as another dataset then build models on both datasets(This model will help alot to know how skewed data is affecive like it will| | help to know what happens when the real data comes where our skewed data is not actually skewed data.) and another one is using      |  |  recursive feature elimination to eliminate the unimportant variables, but due to lack of computing power i am unable to build them. |
+| _ _ _ _ _ _ _ _ _ _ __ _ _ _ __ _ _ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _ _ __ _ _ __ _ _ __ _ __ _ _ __ _ _ __ _ __ _ __ _ _ __ _ __ __ _ _|
+
+Final note:
+	Here i trained models only on 3% of the data so the sampling error is so high and it doesn't give good accuracy on any real time data but if we train the model with larger data then for sure it will give good accuracy. Here we can't conclude that candidate 2 performs well since it was not trained on larger data may the candidates perform well if we train the model with larger data.
